@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float visitorsAlarmSpeedTier3 = 20f;
     [SerializeField] private int visitorsTier2 = 4;
     [SerializeField] private int visitorsTier3 = 8;
+    [SerializeField] private float alertThreeshold = 60;
 
     public float alarmValue = 0f;
     public bool alarmStateGuide = false;
@@ -31,6 +32,8 @@ public class PlayerManager : MonoBehaviour
     public bool visitorAlarmRunning = false;
 
     public int visitorsNb = 0;
+
+    public bool alertMode = false;
 
     private List<Guid> visitorsAlarm = new List<Guid>();
     
@@ -68,7 +71,7 @@ public class PlayerManager : MonoBehaviour
             }
         }
         // Stop Alarm
-        else if (!lowerAlarmRunning && alarmValue >= 0.0f)
+        else if (!lowerAlarmRunning && alarmValue > 0.0f)
         {
             StopCoroutine("AddAlarmFromGuide");
             StopCoroutine("AddAlarmFromVisitors");
@@ -88,12 +91,6 @@ public class PlayerManager : MonoBehaviour
             visitorAlarmRunning = false;
             StopCoroutine("AddAlarmFromVisitors");
         }
-
-        // WIN
-        if (nbWordsCollected == nbWordsRequired)
-        {
-            GameSystem.instance.gameState = GameState.Win;
-        }
         
         // GAME OVER
         if (alarmValue >= maxAlarmValue)
@@ -105,6 +102,7 @@ public class PlayerManager : MonoBehaviour
     private void LateUpdate()
     {
         AlarmSlider.value = alarmValue;
+        alertMode = alarmValue > alertThreeshold;
     }
 
     private IEnumerator LowerAlarm()
@@ -116,6 +114,7 @@ public class PlayerManager : MonoBehaviour
             yield return null;
         }
 
+        alarmValue = 0f;
         lowerAlarmRunning = false;
     }
 
@@ -148,7 +147,7 @@ public class PlayerManager : MonoBehaviour
             alarmValue += Time.deltaTime * speed;
             yield return null;
         }
-
+        
         visitorAlarmRunning = false;
     }
 
