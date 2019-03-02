@@ -6,18 +6,20 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class RaycastVision : MonoBehaviour
 {
-    public Transform PlayerTransform;
-
     [SerializeField] private float sightDistance = 2f;
     [SerializeField] private float visionHeight = 1.5f;
     [SerializeField] private float visionAngle = 20f;
     [SerializeField] private float checkDelay = 0.1f;
 
+    private Transform playerTransform;
     private Guid guid;
     
     private void Start()
     {
         guid = Guid.NewGuid();
+
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
         StartCoroutine(PlayerCheckRoutine());
     }
 
@@ -47,7 +49,7 @@ public class RaycastVision : MonoBehaviour
         // startVecFwd.y += visionHeight;
 
         RaycastHit hit;
-        Vector3 rayDirection = PlayerTransform.position - startVec;
+        Vector3 rayDirection = playerTransform.position - startVec;
         rayDirection.y = 0f;
 
         float rotationOffset = tr.eulerAngles.y;

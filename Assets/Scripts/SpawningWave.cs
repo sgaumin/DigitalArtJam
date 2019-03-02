@@ -54,8 +54,6 @@ public class SpawningWave : MonoBehaviour
 
             indexHour++;
             UpdateHour();
-
-            Debug.Log("Next Hour");
         }
     }
 

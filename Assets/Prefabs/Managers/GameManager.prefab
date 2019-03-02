@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4979215964908280521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4979215964908280519}
+  - component: {fileID: 4979215964908280518}
+  - component: {fileID: 1587301288}
+  - component: {fileID: 3736990525506153137}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4979215964908280519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4979215964908280521}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4979215964908280518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4979215964908280521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7106df5839228c4c8dd6566413d7536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToChange: 3
+  numberDestinationsPerRoom: 3
+  entry: {fileID: 0}
+  exit: {fileID: 0}
+  destinationsFirstRoom:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  destinationsSecondRoom: []
+  destinationsThirdRoom:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  destinationsCorridor: []
+--- !u!114 &1587301288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4979215964908280521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f65dd929f9c0ac4aa023999fa048f70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AlarmSlider: {fileID: 0}
+  nbWordsRequired: 10
+  lowerAlarmSpeed: 50
+  guideAlarmSpeed: 70
+  visitorsAlarmSpeedTier1: 5
+  visitorsAlarmSpeedTier2: 10
+  visitorsAlarmSpeedTier3: 20
+  visitorsTier2: 4
+  visitorsTier3: 8
+  alertThreeshold: 60
+  alarmValue: 0
+  alarmStateGuide: 0
+  alarmStateVisitor: 0
+  lowerAlarmRunning: 0
+  guideAlarmRunning: 0
+  visitorAlarmRunning: 0
+  visitorsNb: 0
+  alertMode: 0
+  nbWordsCollected: 0
+--- !u!114 &3736990525506153137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4979215964908280521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82a29db55617ba54d97d3381ee10e3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guidePrefab: {fileID: 7906396377121723459, guid: 2d217eade5abe4c458d184c904f6cc12,
+    type: 3}
+  visitorPrefab: {fileID: 3502893803404988240, guid: 37bc8725517eba34794b12f0bc11d536,
+    type: 3}
+  hourDuration: 30
+  nbSpawnPerHours:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 4
+  - 3
+  - 2
+  - 1
+  - 1
+  numberVisitorSpawnMin: 2
+  numberVisitorSpawnMax: 6
+  spawningPointsVisitor:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawningPointsGuide: {fileID: 0}
+  hourText: {fileID: 0}

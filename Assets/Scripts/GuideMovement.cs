@@ -8,15 +8,15 @@ public class GuideMovement : MonoBehaviour
     public GuideState guideState = GuideState.Talk;
 
     [HideInInspector] public Transform nextPosition;
+    [SerializeField] private float chanceToGoToCorridor;
 
     private Transform[] destinationsFirstRoomTemp;
     private Transform[] destinastionsSecondRoomTemp;
     private Transform[] destinationsThirdRoomTemp;
 
-    public bool goToCorridor;
-
     private Queue<Transform> path;
     private NavMeshAgent agent;
+    private bool goToCorridor;
 
     void Start()
     {
@@ -24,7 +24,7 @@ public class GuideMovement : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
 
-        goToCorridor = Random.value < 0.5;
+        goToCorridor = Random.value < chanceToGoToCorridor;
 
         InitializePath();
 

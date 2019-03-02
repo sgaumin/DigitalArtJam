@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Guide
   - Visitor
+  - WordSlider
   layers:
   - Default
   - TransparentFX

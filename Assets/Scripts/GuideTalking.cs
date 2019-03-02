@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,14 +9,21 @@ public class GuideTalking : MonoBehaviour
     [SerializeField] private float resetSpeed = 20f;
 
     public float captureWordProgress = 0f;
-    public Slider captureWordSlider;
 
+    private Slider captureWordSlider;
     private bool collectingWord = false;
+
+    private void Start()
+    {
+        captureWordSlider = GameObject.FindGameObjectWithTag("WordSlider").GetComponent<Slider>();
+    }
 
     private IEnumerator StartCollectingWord()
     {
         collectingWord = true;
         captureWordProgress = 0f;
+
+        // Start word Detection
         while (captureWordProgress <= 100f)
         {
             captureWordProgress += Time.deltaTime * speed;
@@ -27,6 +32,7 @@ public class GuideTalking : MonoBehaviour
 
         // Word collected, yey!
         collectingWord = false;
+        // son check
         PlayerManager.instance.nbWordsCollected++;
         StartCoroutine("ResetCollectingWord");
 
@@ -42,6 +48,7 @@ public class GuideTalking : MonoBehaviour
         }
         
         if (!collectingWord)
+            // son feedback bad
             captureWordProgress = 0f;
         yield return null;
     }
