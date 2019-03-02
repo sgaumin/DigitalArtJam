@@ -1,21 +1,38 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SpawningWave : MonoBehaviour
 {
+    [Header("Prefabs")]
     [SerializeField] private GuideMovement guidePrefab;
     [SerializeField] private Visitor visitorPrefab;
 
-    [SerializeField] private float spawningTime;
-    [SerializeField] private Transform[] spawningVisitors;
-    [SerializeField] private Transform spawningGuide;
+    [Header("Parameters")]
+    [SerializeField] private float hourDuration;
+    [SerializeField] private float[] nbSpawnPerHours;
 
-    [SerializeField] private int numberSpawnMin;
-    [SerializeField] private int numberSpawnMax;
+    [Space]
+    [SerializeField] private int numberVisitorSpawnMin;
+    [SerializeField] private int numberVisitorSpawnMax;
+
+    [Header("Spawning points")]
+    [SerializeField] private Transform[] spawningPointsVisitor;
+    [SerializeField] private Transform spawningPointsGuide;
+
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI hourText;
+
+    private int hours;
+    private int indexHour;
 
     void Start()
     {
+        // Hours UI
+        hours = 10;
+        indexHour = 0;
+        UpdateHour();
+
         StartCoroutine(SpawningWaves());
     }
 
@@ -23,24 +40,35 @@ public class SpawningWave : MonoBehaviour
     {
         while (true)
         {
-            // Shuffle Spawning Points
-            spawningVisitors = Shuffle(spawningVisitors);
+            for (int i = 0; i < nbSpawnPerHours[indexHour]; i++)
+            {
+                // Shuffle Spawning Points
+                spawningPointsVisitor = Shuffle(spawningPointsVisitor);
 
-            // Spawn Wave
-            int numberVisitorTemp = Random.Range(numberSpawnMin, numberSpawnMax);
-            SpawnWave(numberVisitorTemp);
+                // Spawn Wave
+                int numberVisitorTemp = Random.Range(numberVisitorSpawnMin, numberVisitorSpawnMax);
+                SpawnWave(numberVisitorTemp);
 
-            yield return new WaitForSeconds(spawningTime);
+                yield return new WaitForSeconds(hourDuration / nbSpawnPerHours[indexHour]);
+            }
+
+            indexHour++;
+            UpdateHour();
+
+            Debug.Log("Next Hour");
         }
     }
 
     void SpawnWave(int numberVisitors)
     {
 
-        GuideMovement guideTemp = Instantiate(guidePrefab, spawningGuide.transform.position, Quaternion.identity);
+        GuideMovement guideTemp = Instantiate(guidePrefab, spawningPointsGuide.transform.position, Quaternion.identity);
+        guideTemp.transform.SetParent(transform);
+
         for (int i = 0; i < numberVisitors; i++)
         {
-            Visitor visitorTemp = Instantiate(visitorPrefab, spawningVisitors[i].transform.position, Quaternion.identity);
+            Visitor visitorTemp = Instantiate(visitorPrefab, spawningPointsVisitor[i].transform.position, Quaternion.identity);
+            visitorTemp.transform.SetParent(transform);
             visitorTemp.guideToFollow = guideTemp.transform;
         }
     }
@@ -57,5 +85,12 @@ public class SpawningWave : MonoBehaviour
         }
 
         return transformArray;
+    }
+
+    // Update hour time text
+    void UpdateHour()
+    {
+        hours++;
+        hourText.text = hours.ToString() + ":00";
     }
 }
