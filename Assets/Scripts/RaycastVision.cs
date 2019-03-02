@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 
@@ -10,13 +11,30 @@ public class RaycastVision : MonoBehaviour
     [SerializeField] private float sightDistance = 2f;
     [SerializeField] private float visionHeight = 1.5f;
     [SerializeField] private float visionAngle = 20f;
+    [SerializeField] private float checkDelay = 0.1f;
+
+    private Guid guid;
     
-    public event Action OnSeePlayer = delegate { };
-    
-    private void Update()
+    private void Start()
     {
-        if (CanSeePlayer())
-            OnSeePlayer();
+        guid = Guid.NewGuid();
+        StartCoroutine(PlayerCheckRoutine());
+    }
+
+    private IEnumerator PlayerCheckRoutine()
+    {
+        while (GameSystem.instance.gameState == GameState.Playing)
+        {
+            if (CanSeePlayer())
+            {
+                PlayerManager.instance.OnSeenPlayer(tag, guid);
+            }
+            else
+            {
+                PlayerManager.instance.OnPlayerLost(tag, guid);
+            }
+            yield return new WaitForSeconds(checkDelay);
+        }
     }
 
     private bool CanSeePlayer()
@@ -41,7 +59,7 @@ public class RaycastVision : MonoBehaviour
             Mathf.Sin((visionAngle + 90f - rotationOffset) * Mathf.Deg2Rad));
         leftLineVec *= sightDistance;
         leftLineVec += startVec;
-        
+
         Vector3 rightLineVec = new Vector3(
             Mathf.Cos((-visionAngle + 90f - rotationOffset) * Mathf.Deg2Rad),
             0f,
@@ -59,7 +77,7 @@ public class RaycastVision : MonoBehaviour
         // This would cast rays only against colliders in layer 2.
         // But instead we want to collide against everything except layer 2. The ~ operator does this, it inverts a bitmask.
         layerMask = ~layerMask;
-        
+
         if ((Vector3.Angle(rayDirection, startVecFwd)) < visionAngle &&
             Physics.Raycast(startVec, rayDirection, out hit, sightDistance, layerMask))
         {
