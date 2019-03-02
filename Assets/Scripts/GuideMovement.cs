@@ -5,16 +5,21 @@ using UnityEngine.AI;
 
 public class GuideMovement : MonoBehaviour
 {
-    [SerializeField] private Transform entry;
-    [SerializeField] private Transform[] destinations;
+    private GuideState guideState = GuideState.Talk;
+
     [SerializeField] private float timeToChange;
+    [SerializeField] private int numberDestinationsPerRoom;
+    [SerializeField] private Transform entry;
+    [SerializeField] private Transform exit;
+
+    [SerializeField] private Transform[] destinationsFirstRoom;
+    [SerializeField] private Transform[] destinationsSecondRoom;
+    [SerializeField] private Transform[] destinationsThirdRoom;
 
     private Queue<Transform> path;
     private NavMeshAgent agent;
 
     // TO DO: Create a array of external destinations
-    // TO DO: Link to Guide State
-    // TO DO: Start waiting time when arrived at the destination
 
     void Start()
     {
@@ -24,21 +29,55 @@ public class GuideMovement : MonoBehaviour
 
         InitializePath();
 
-        StartCoroutine(Move());
+        StartCoroutine(GuideMove());
     }
 
-    IEnumerator Move()
+    IEnumerator GuideMove()
     {
         while (path.Count > 0)
         {
+            // Retrieve next destination
             Transform nextPosition = path.Dequeue();
 
-            agent.SetDestination(nextPosition.position);
+            // Set the next destination
+            if (guideState == GuideState.Talk)
+            {
+                agent.SetDestination(nextPosition.position);
+                guideState = GuideState.Walking;
+            }
 
-            yield return new WaitForSeconds(timeToChange);
+            if (guideState == GuideState.Walking)
+            {
+                // Check if Player is arrived to his next destination
+                while (!isArrivedToDestination(nextPosition.position))
+                {
+                    yield return null;
+                }
+
+                Debug.Log(isArrivedToDestination(nextPosition.position));
+
+                // Update Guide State
+                guideState = GuideState.Talk;
+
+                yield return new WaitForSeconds(timeToChange);
+            }
         }
+    }
 
-        yield break;
+    // Method which detects if the Guide is arrived to destination
+    bool isArrivedToDestination(Vector3 target)
+    {
+        Vector3 playerPosition = new Vector3(transform.position.x, target.y, transform.position.z);
+        float distanceToTarget = Vector2.Distance(target, playerPosition);
+
+        if (distanceToTarget < Mathf.Epsilon)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     void InitializePath()
@@ -47,16 +86,32 @@ public class GuideMovement : MonoBehaviour
         path.Enqueue(entry);
 
         // Randomize destiantions array
-        destinations = Shuffle(destinations);
+        destinationsFirstRoom = Shuffle(destinationsFirstRoom);
+        destinationsSecondRoom = Shuffle(destinationsSecondRoom);
+        destinationsThirdRoom = Shuffle(destinationsThirdRoom);
 
         // Adding all destinations
-        for (int i = 0; i < destinations.Length; i++)
+
+        // Room 1
+        for (int i = 0; i < numberDestinationsPerRoom; i++)
         {
-            path.Enqueue(destinations[i]);
+            path.Enqueue(destinationsFirstRoom[i]);
+        }
+
+        // Room 2
+        for (int i = 0; i < numberDestinationsPerRoom; i++)
+        {
+            path.Enqueue(destinationsSecondRoom[i]);
+        }
+
+        // Room 3
+        for (int i = 0; i < numberDestinationsPerRoom; i++)
+        {
+            path.Enqueue(destinationsThirdRoom[i]);
         }
 
         // Set Entry level as last destination
-        path.Enqueue(entry);
+        path.Enqueue(exit);
     }
 
     // Method in order to Shuffle detinations array
