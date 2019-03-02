@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
     public event Action OnPause = delegate { };
 
     // Inputs Code
-    [SerializeField] private KeyCode pauseCode;
+    [SerializeField] private KeyCode pauseCode = KeyCode.P;
 
     // Initialize Singleton
     private void Awake()
