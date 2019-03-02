@@ -53,13 +53,18 @@ public class RaycastVision : MonoBehaviour
         Debug.DrawLine(startVec, frontLineVec, Color.green);
         Debug.DrawLine(startVec, rightLineVec, Color.blue);
 
-        int layerMask = 1 << 10;
+        // Bit shift the index of the layer (2) to get a bit mask
+        int layerMask = 1 << 2;
+
+        // This would cast rays only against colliders in layer 2.
+        // But instead we want to collide against everything except layer 2. The ~ operator does this, it inverts a bitmask.
+        layerMask = ~layerMask;
+        
         if ((Vector3.Angle(rayDirection, startVecFwd)) < visionAngle &&
             Physics.Raycast(startVec, rayDirection, out hit, sightDistance, layerMask))
         {
             // Detect if player is within the field of view
-                Debug.Log("Can see player");
-                return true;
+            return hit.transform.CompareTag("Player");
         }
 
         return false;
