@@ -23,5 +23,6 @@ public enum GameState
     StartMenu,
     Playing,
     Pause,
-    GameOver
+    GameOver,
+    Win
 }

@@ -16,18 +16,23 @@ public class GuideTalking : MonoBehaviour
 
     private IEnumerator StartCollectingWord()
     {
-        captureWordSlider.value = 0f;
+        captureWordProgress = 0f;
         while (captureWordProgress <= 100f)
         {
             captureWordProgress += Time.deltaTime * speed;
-            captureWordSlider.value = captureWordProgress;
             yield return null;
         }
 
         // Word collected, yey!
         PlayerManager.instance.nbWordsCollected++;
+        captureWordProgress = 0f;
 
         yield return null;
+    }
+
+    private void LateUpdate()
+    {
+        captureWordSlider.value = captureWordProgress;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,7 +44,7 @@ public class GuideTalking : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        captureWordSlider.value = 0f;
+        captureWordProgress = 0f;
         StopCoroutine("StartCollectingWord");
     }
 }

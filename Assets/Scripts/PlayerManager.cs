@@ -34,7 +34,6 @@ public class PlayerManager : MonoBehaviour
 
     private List<Guid> visitorsAlarm = new List<Guid>();
     
-    [HideInInspector]
     public int nbWordsCollected = 0;
     
     private void Awake()
@@ -90,6 +89,12 @@ public class PlayerManager : MonoBehaviour
             StopCoroutine("AddAlarmFromVisitors");
         }
 
+        // WIN
+        if (nbWordsCollected == nbWordsRequired)
+        {
+            GameSystem.instance.gameState = GameState.Win;
+        }
+        
         // GAME OVER
         if (alarmValue >= maxAlarmValue)
         {
