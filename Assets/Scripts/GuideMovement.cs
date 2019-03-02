@@ -7,19 +7,12 @@ public class GuideMovement : MonoBehaviour
 {
     private GuideState guideState = GuideState.Talk;
 
-    [SerializeField] private float timeToChange;
-    [SerializeField] private int numberDestinationsPerRoom;
-    [SerializeField] private Transform entry;
-    [SerializeField] private Transform exit;
-
-    [SerializeField] private Transform[] destinationsFirstRoom;
-    [SerializeField] private Transform[] destinationsSecondRoom;
-    [SerializeField] private Transform[] destinationsThirdRoom;
+    private Transform[] destinationsFirstRoomTemp;
+    private Transform[] destinastionsSecondRoomTemp;
+    private Transform[] destinationsThirdRoomTemp;
 
     private Queue<Transform> path;
     private NavMeshAgent agent;
-
-    // TO DO: Create a array of external destinations
 
     void Start()
     {
@@ -54,12 +47,10 @@ public class GuideMovement : MonoBehaviour
                     yield return null;
                 }
 
-                Debug.Log(isArrivedToDestination(nextPosition.position));
-
                 // Update Guide State
                 guideState = GuideState.Talk;
 
-                yield return new WaitForSeconds(timeToChange);
+                yield return new WaitForSeconds(GuideManager.instance.timeToChange);
             }
         }
     }
@@ -83,35 +74,35 @@ public class GuideMovement : MonoBehaviour
     void InitializePath()
     {
         // Set Entry level as first destination
-        path.Enqueue(entry);
+        path.Enqueue(GuideManager.instance.entry);
 
         // Randomize destiantions array
-        destinationsFirstRoom = Shuffle(destinationsFirstRoom);
-        destinationsSecondRoom = Shuffle(destinationsSecondRoom);
-        destinationsThirdRoom = Shuffle(destinationsThirdRoom);
+        destinationsFirstRoomTemp = Shuffle(GuideManager.instance.destinationsFirstRoom);
+        destinastionsSecondRoomTemp = Shuffle(GuideManager.instance.destinastionsSecondRoom);
+        destinationsThirdRoomTemp = Shuffle(GuideManager.instance.destinationsThirdRoom);
 
         // Adding all destinations
 
         // Room 1
-        for (int i = 0; i < numberDestinationsPerRoom; i++)
+        for (int i = 0; i < GuideManager.instance.numberDestinationsPerRoom; i++)
         {
-            path.Enqueue(destinationsFirstRoom[i]);
+            path.Enqueue(destinationsFirstRoomTemp[i]);
         }
 
         // Room 2
-        for (int i = 0; i < numberDestinationsPerRoom; i++)
+        for (int i = 0; i < GuideManager.instance.numberDestinationsPerRoom; i++)
         {
-            path.Enqueue(destinationsSecondRoom[i]);
+            path.Enqueue(destinastionsSecondRoomTemp[i]);
         }
 
         // Room 3
-        for (int i = 0; i < numberDestinationsPerRoom; i++)
+        for (int i = 0; i < GuideManager.instance.numberDestinationsPerRoom; i++)
         {
-            path.Enqueue(destinationsThirdRoom[i]);
+            path.Enqueue(destinationsThirdRoomTemp[i]);
         }
 
         // Set Entry level as last destination
-        path.Enqueue(exit);
+        path.Enqueue(GuideManager.instance.exit);
     }
 
     // Method in order to Shuffle detinations array

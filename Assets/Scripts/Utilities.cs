@@ -4,7 +4,8 @@
     public const string gameScene = "";
 }
 
-public enum GuideState {
+public enum GuideState
+{
     Walking,
     Talk,
     Doubt,
@@ -15,4 +16,11 @@ public enum GuardState
 {
     Waiting,
     Alert,
+}
+
+public enum GameState
+{
+    Playing,
+    Pause,
+    GameOver
 }
