@@ -20,6 +20,7 @@ public enum GuardState
 
 public enum GameState
 {
+    StartMenu,
     Playing,
     Pause,
     GameOver

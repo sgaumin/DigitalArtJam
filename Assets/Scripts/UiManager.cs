@@ -21,7 +21,8 @@ public class UiManager : MonoBehaviour
     public Text header; 
 
     public bool gameOver = false;
-    private bool fourthButtonIsActive = false; 
+    private bool fourthButtonIsActive = false;
+    private bool isPlaying = false; 
 
     // Start is called before the first frame update
     void Start()
@@ -39,13 +40,13 @@ public class UiManager : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.Escape))
         {
-            PauseMenu();
+            GameSystem.instance.gameState = GameState.Pause;
         }
 
-        if(gameOver == true)
+        /*if(gameOver == true)
         {
             GameOverMenu();
-        }
+        }*/
 
         if(fourthButtonIsActive == true)
         {
@@ -54,6 +55,26 @@ public class UiManager : MonoBehaviour
         else if(fourthButtonIsActive == false)
         {
             button_4.SetActive(false);
+        }
+
+        if(GameSystem.instance.gameState == GameState.StartMenu)
+        {
+            StartMenu();
+        }
+
+        if (GameSystem.instance.gameState == GameState.Playing && isPlaying == true)
+        {
+            ResumeGame();
+        }
+
+        if (GameSystem.instance.gameState == GameState.Pause)
+        {
+            PauseMenu();
+        }
+
+        if(GameSystem.instance.gameState == GameState.GameOver)
+        {
+            GameOverMenu();
         }
     }
 
@@ -65,7 +86,13 @@ public class UiManager : MonoBehaviour
         }
 
         menu.SetActive(false);
-        Debug.Log("start");
+
+        GameSystem.instance.gameState = GameState.Playing;
+
+        if(isPlaying == false)
+        {
+            isPlaying = true;
+        }
     }
 
     void QuitGame()
@@ -80,9 +107,9 @@ public class UiManager : MonoBehaviour
 
     void PauseMenu()
     {
-        header.text = "Pause";
-
         menu.SetActive(true);
+
+        header.text = "Pause";
 
         firstButton.onClick.AddListener(ResumeGame);
         firstButtonText.text = "Resume";
@@ -93,7 +120,7 @@ public class UiManager : MonoBehaviour
         thirdButton.onClick.AddListener(SettingsMenu);
         thirdButtonText.text = "Settings";
 
-        button_4.SetActive(true);
+        fourthButtonIsActive = true; 
         fourthButton.onClick.AddListener(QuitGame);
         fourthButtonText.text = "Quit";
     }
@@ -105,6 +132,16 @@ public class UiManager : MonoBehaviour
 
     void StartMenu()
     {
+        if(!menu.activeInHierarchy)
+        {
+            menu.SetActive(true);
+        }
+
+        if(gameOver == true)
+        {
+            gameOver = false; 
+        }
+
         header.text = "Game Title";
 
         firstButton.onClick.AddListener(StartGame);
@@ -116,7 +153,9 @@ public class UiManager : MonoBehaviour
         thirdButton.onClick.AddListener(QuitGame);
         thirdButtonText.text = "Quit";
 
-        button_4.SetActive(false);
+        fourthButtonIsActive = false;
+
+
     }
 
     void GameOverMenu()
@@ -134,6 +173,6 @@ public class UiManager : MonoBehaviour
         thirdButton.onClick.AddListener(QuitGame);
         thirdButtonText.text = "Quit";
 
-        button_4.SetActive(false);
+        fourthButtonIsActive = false;
     }
 }
