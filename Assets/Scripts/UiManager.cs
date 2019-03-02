@@ -117,12 +117,12 @@ public class UiManager : MonoBehaviour
         secondButton.onClick.AddListener(StartMenu);
         secondButtonText.text = "Start Menu";
 
-        thirdButton.onClick.AddListener(SettingsMenu);
-        thirdButtonText.text = "Settings";
+        thirdButton.onClick.AddListener(QuitGame);
+        thirdButtonText.text = "Quit";
 
         fourthButtonIsActive = true; 
-        fourthButton.onClick.AddListener(QuitGame);
-        fourthButtonText.text = "Quit";
+        fourthButton.onClick.AddListener(SettingsMenu);
+        fourthButtonText.text = "Settings";
     }
 
     void ResumeGame()
@@ -147,15 +147,13 @@ public class UiManager : MonoBehaviour
         firstButton.onClick.AddListener(StartGame);
         firstButtonText.text = "Start Game";
 
-        secondButton.onClick.AddListener(SettingsMenu);
-        secondButtonText.text = "Settings";
+        secondButton.onClick.AddListener(QuitGame);
+        secondButtonText.text = "Quit";
 
-        thirdButton.onClick.AddListener(QuitGame);
-        thirdButtonText.text = "Quit";
+        thirdButton.onClick.AddListener(SettingsMenu);
+        thirdButtonText.text = "Settings";
 
         fourthButtonIsActive = false;
-
-
     }
 
     void GameOverMenu()
