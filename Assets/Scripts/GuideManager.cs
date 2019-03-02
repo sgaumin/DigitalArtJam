@@ -10,8 +10,9 @@ public class GuideManager : MonoBehaviour
     public Transform exit;
 
     public Transform[] destinationsFirstRoom;
-    public Transform[] destinastionsSecondRoom;
+    public Transform[] destinationsSecondRoom;
     public Transform[] destinationsThirdRoom;
+    public Transform[] destinationsCorridor;
 
     private void Awake()
     {
