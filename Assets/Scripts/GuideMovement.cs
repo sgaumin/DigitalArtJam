@@ -5,11 +5,15 @@ using UnityEngine.AI;
 
 public class GuideMovement : MonoBehaviour
 {
-    private GuideState guideState = GuideState.Talk;
+    public GuideState guideState = GuideState.Talk;
+
+    [HideInInspector] public Transform nextPosition;
 
     private Transform[] destinationsFirstRoomTemp;
     private Transform[] destinastionsSecondRoomTemp;
     private Transform[] destinationsThirdRoomTemp;
+
+    public bool goToCorridor;
 
     private Queue<Transform> path;
     private NavMeshAgent agent;
@@ -19,6 +23,8 @@ public class GuideMovement : MonoBehaviour
         path = new Queue<Transform>();
 
         agent = GetComponent<NavMeshAgent>();
+
+        goToCorridor = Random.value < 0.5;
 
         InitializePath();
 
@@ -30,7 +36,7 @@ public class GuideMovement : MonoBehaviour
         while (path.Count > 0)
         {
             // Retrieve next destination
-            Transform nextPosition = path.Dequeue();
+            nextPosition = path.Dequeue();
 
             // Set the next destination
             if (guideState == GuideState.Talk)
@@ -58,10 +64,10 @@ public class GuideMovement : MonoBehaviour
     // Method which detects if the Guide is arrived to destination
     bool isArrivedToDestination(Vector3 target)
     {
-        Vector3 playerPosition = new Vector3(transform.position.x, target.y, transform.position.z);
-        float distanceToTarget = Vector2.Distance(target, playerPosition);
+        Vector3 guidePosition = new Vector3(transform.position.x, target.y, transform.position.z);
+        float distanceToTarget = Vector2.Distance(target, guidePosition);
 
-        if (distanceToTarget < Mathf.Epsilon)
+        if (distanceToTarget < 0.3f)
         {
             return true;
         }
@@ -78,21 +84,30 @@ public class GuideMovement : MonoBehaviour
 
         // Randomize destiantions array
         destinationsFirstRoomTemp = Shuffle(GuideManager.instance.destinationsFirstRoom);
-        destinastionsSecondRoomTemp = Shuffle(GuideManager.instance.destinastionsSecondRoom);
+        destinastionsSecondRoomTemp = Shuffle(GuideManager.instance.destinationsSecondRoom);
         destinationsThirdRoomTemp = Shuffle(GuideManager.instance.destinationsThirdRoom);
 
-        // Adding all destinations
-
+        // --- Adding all destinations
         // Room 1
         for (int i = 0; i < GuideManager.instance.numberDestinationsPerRoom; i++)
         {
             path.Enqueue(destinationsFirstRoomTemp[i]);
         }
 
-        // Room 2
-        for (int i = 0; i < GuideManager.instance.numberDestinationsPerRoom; i++)
+        if (!goToCorridor)
         {
-            path.Enqueue(destinastionsSecondRoomTemp[i]);
+            // Room 2
+            for (int i = 0; i < GuideManager.instance.numberDestinationsPerRoom; i++)
+            {
+                path.Enqueue(destinastionsSecondRoomTemp[i]);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < GuideManager.instance.numberDestinationsPerRoom; i++)
+            {
+                path.Enqueue(GuideManager.instance.destinationsCorridor[i]);
+            }
         }
 
         // Room 3
@@ -117,5 +132,11 @@ public class GuideMovement : MonoBehaviour
         }
 
         return transformArray;
+    }
+
+    // Destroy
+    public void DestroyGuide()
+    {
+        Destroy(gameObject, 4f);
     }
 }

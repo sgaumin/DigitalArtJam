@@ -33,7 +33,8 @@ public class RaycastVision : MonoBehaviour
             {
                 PlayerManager.instance.OnPlayerLost(tag, guid);
             }
-            yield return new WaitForSeconds(checkDelay);
+            // yield return new WaitForSeconds(checkDelay);
+            yield return null;
         }
     }
 

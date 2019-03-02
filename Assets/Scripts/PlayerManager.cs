@@ -11,6 +11,9 @@ public class PlayerManager : MonoBehaviour
 
     private float maxAlarmValue = 100f;
 
+    [SerializeField] private int nbWordsRequired = 10;
+    
+   
     [SerializeField] private float lowerAlarmSpeed = 0.1f;
     [SerializeField] private float guideAlarmSpeed = 0.05f;
     [SerializeField] private float visitorsAlarmSpeedTier1 = 1f;
@@ -18,6 +21,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float visitorsAlarmSpeedTier3 = 20f;
     [SerializeField] private int visitorsTier2 = 4;
     [SerializeField] private int visitorsTier3 = 8;
+    [SerializeField] private float alertThreeshold = 60;
 
     public float alarmValue = 0f;
     public bool alarmStateGuide = false;
@@ -29,8 +33,12 @@ public class PlayerManager : MonoBehaviour
 
     public int visitorsNb = 0;
 
-    private List<Guid> visitorsAlarm = new List<Guid>();
+    public bool alertMode = false;
 
+    private List<Guid> visitorsAlarm = new List<Guid>();
+    
+    public int nbWordsCollected = 0;
+    
     private void Awake()
     {
         instance = this;
@@ -63,7 +71,7 @@ public class PlayerManager : MonoBehaviour
             }
         }
         // Stop Alarm
-        else if (!lowerAlarmRunning && alarmValue >= 0.0f)
+        else if (!lowerAlarmRunning && alarmValue > 0.0f)
         {
             StopCoroutine("AddAlarmFromGuide");
             StopCoroutine("AddAlarmFromVisitors");
@@ -83,7 +91,7 @@ public class PlayerManager : MonoBehaviour
             visitorAlarmRunning = false;
             StopCoroutine("AddAlarmFromVisitors");
         }
-
+        
         // GAME OVER
         if (alarmValue >= maxAlarmValue)
         {
@@ -94,6 +102,7 @@ public class PlayerManager : MonoBehaviour
     private void LateUpdate()
     {
         AlarmSlider.value = alarmValue;
+        alertMode = alarmValue > alertThreeshold;
     }
 
     private IEnumerator LowerAlarm()
@@ -105,6 +114,7 @@ public class PlayerManager : MonoBehaviour
             yield return null;
         }
 
+        alarmValue = 0f;
         lowerAlarmRunning = false;
     }
 
@@ -137,7 +147,7 @@ public class PlayerManager : MonoBehaviour
             alarmValue += Time.deltaTime * speed;
             yield return null;
         }
-
+        
         visitorAlarmRunning = false;
     }
 
