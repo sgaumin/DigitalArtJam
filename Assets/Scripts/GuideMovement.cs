@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class GuideMovement : MonoBehaviour
 {
-    private GuideState guideState = GuideState.Talk;
+    public GuideState guideState = GuideState.Talk;
 
     [HideInInspector] public Transform nextPosition;
 

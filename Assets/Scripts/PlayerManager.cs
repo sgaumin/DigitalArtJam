@@ -11,6 +11,9 @@ public class PlayerManager : MonoBehaviour
 
     private float maxAlarmValue = 100f;
 
+    [SerializeField] private int nbWordsRequired = 10;
+    
+   
     [SerializeField] private float lowerAlarmSpeed = 0.1f;
     [SerializeField] private float guideAlarmSpeed = 0.05f;
     [SerializeField] private float visitorsAlarmSpeedTier1 = 1f;
@@ -30,7 +33,10 @@ public class PlayerManager : MonoBehaviour
     public int visitorsNb = 0;
 
     private List<Guid> visitorsAlarm = new List<Guid>();
-
+    
+    [HideInInspector]
+    public int nbWordsCollected = 0;
+    
     private void Awake()
     {
         instance = this;
