@@ -14,11 +14,13 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID INGAME_INNIT_SOUND = 3813649501U;
+        static const AkUniqueID PLAY_ALARM_TICK_SOUND = 1344795595U;
         static const AkUniqueID PLAY_DETECTION_END = 4207641709U;
         static const AkUniqueID PLAY_DETECTION_START = 1411054566U;
         static const AkUniqueID PLAY_DGA_SFX_GAMEOVER = 4216186185U;
         static const AkUniqueID PLAY_GUIDE_VOICE_IN = 234760877U;
-        static const AkUniqueID PLAY_GUIDE_VOICE_OUT_02 = 2215638681U;
+        static const AkUniqueID PLAY_GUIDE_VOICE_OUT_01 = 2215638682U;
+        static const AkUniqueID PLAY_GUIDE_VOICE_OUT_FAIL = 3134978043U;
         static const AkUniqueID PLAY_MENU = 1278378707U;
         static const AkUniqueID PLAY_MENU_CLIC = 1982372943U;
         static const AkUniqueID PLAY_WHISTLE = 2693257580U;
@@ -39,6 +41,17 @@ namespace AK
                 static const AkUniqueID REPERE = 2421815328U;
             } // namespace STATE
         } // namespace INFILTRATION
+
+        namespace MENU_PAUSE
+        {
+            static const AkUniqueID GROUP = 2170009975U;
+
+            namespace STATE
+            {
+                static const AkUniqueID PAUSE = 3092587493U;
+                static const AkUniqueID RESUME = 953277036U;
+            } // namespace STATE
+        } // namespace MENU_PAUSE
 
         namespace SALLES
         {
@@ -66,21 +79,22 @@ namespace AK
 
     namespace SWITCHES
     {
-        namespace FAIL_CHEK_ZONE
+        namespace FAIL_CHECK_ZONE
         {
-            static const AkUniqueID GROUP = 3149110466U;
+            static const AkUniqueID GROUP = 3926581785U;
 
             namespace SWITCH
             {
                 static const AkUniqueID CHECK = 4040764971U;
                 static const AkUniqueID FAIL = 2596272617U;
             } // namespace SWITCH
-        } // namespace FAIL_CHEK_ZONE
+        } // namespace FAIL_CHECK_ZONE
 
     } // namespace SWITCHES
 
     namespace GAME_PARAMETERS
     {
+        static const AkUniqueID DIST_GUIDE_PLAYER = 704234752U;
         static const AkUniqueID FILTER_ON_RTPC = 3583674237U;
         static const AkUniqueID PLAYBACK_RATE = 1524500807U;
         static const AkUniqueID RPM = 796049864U;

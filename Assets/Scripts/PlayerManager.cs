@@ -95,17 +95,22 @@ public class PlayerManager : MonoBehaviour
         // GAME OVER
         if (alarmValue >= maxAlarmValue)
         {
-            // GameSystem.instance.gameState = GameState.GameOver;
+            LevelManager.instance.LoadMenu();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            AkSoundEngine.PostEvent("Play_Whistle", player.gameObject);
         }
     }
 
     private IEnumerator StartAlarmSound()
     {
         yield return new WaitForSeconds(1);
-        while (true)
+        while (alarmValue > 0f)
         {
             float timerValue = (10 / alarmValue);
-            AkSoundEngine.PostEvent("Play_Alarm_Tick_Sound", player.gameObject);
+            AkSoundEngine.PostEvent("Play_Whistle", player.gameObject);
              yield return new WaitForSeconds(timerValue);
         }
 
@@ -113,14 +118,14 @@ public class PlayerManager : MonoBehaviour
     
     private void LateUpdate()
     {
-        if (alarmValue > 0f)
-        {
-            StartCoroutine(StartAlarmSound());
-        }
-        else
-        {
-            StopCoroutine("StartAlarmSound");
-        }
+        // if (alarmValue > 0f)
+        // {
+        //     StartCoroutine(StartAlarmSound());
+        // }
+        // else
+        // {
+        //    StopCoroutine("StartAlarmSound");
+        // }
         
         
         AlarmSlider.value = alarmValue;
@@ -133,6 +138,7 @@ public class PlayerManager : MonoBehaviour
         while (alarmValue >= 0.0f)
         {
             alarmValue -= Time.deltaTime * alarmValues.lowerAlarmSpeed;
+            alarmValue = Mathf.Max(0f, alarmValue);
             yield return null;
         }
 

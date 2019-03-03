@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
     // Load Game Scene
     public void LoadGame()
     {
+        AkSoundEngine.PostEvent("Play_Menu_Clic", gameObject);
         SceneManager.LoadScene(Utilities.gameScene);
     }
 

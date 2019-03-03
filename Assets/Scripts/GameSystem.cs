@@ -27,12 +27,14 @@ public class GameSystem : MonoBehaviour
 
     public void PauseGame()
     {
-        if (gameState == GameState.Playing) {
+        if (gameState == GameState.Playing)
+        {
             gameState = GameState.Pause;
             Time.timeScale = 0f;
         }
 
-        if (gameState == GameState.Pause) {
+        if (gameState == GameState.Pause)
+        {
             gameState = GameState.Playing;
             Time.timeScale = 1f;
         }
@@ -40,9 +42,10 @@ public class GameSystem : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-            {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             LevelManager.instance.LoadMenu();
-            }
+            AkSoundEngine.PostEvent("Play_DGA_Sfx_GameOver", gameObject);
+        }
     }
 }

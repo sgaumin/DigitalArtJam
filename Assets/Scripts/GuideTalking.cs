@@ -42,9 +42,14 @@ public class GuideTalking : MonoBehaviour
 
         // Word collected, yey!
         collectingWord = false;
-        AkSoundEngine.SetSwitch("Fail_Chek_Zone", "Check", this.gameObject);
+
+        AkSoundEngine.SetSwitch("Fail_Check_Zone", "Check", gameObject);
+        AkSoundEngine.SetState("SoundEffects", "Out");
+        AkSoundEngine.PostEvent("Play_Guide_Voice_Out_01", gameObject);
+
+        // AkSoundEngine.SetSwitch("Fail_Chek_Zone", "Check", this.gameObject);
         //  AkSoundEngine.SetState ("SoundEffects", "Out");
-        AkSoundEngine.PostEvent("Play_Guide_Voice_Out_02", gameObject);
+        // AkSoundEngine.PostEvent("Play_Guide_Voice_Out_02", gameObject);
         PlayerManager.instance.nbWordsCollected++;
         StartCoroutine("ResetCollectingWord");
 
@@ -99,6 +104,11 @@ public class GuideTalking : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         collectingWord = false;
         StopCoroutine("StartCollectingWord");
+
+        AkSoundEngine.SetSwitch("Fail_Check_Zone", "Fail", gameObject);
+        AkSoundEngine.SetState("SoundEffects", "Out");
+        AkSoundEngine.PostEvent("Play_Guide_Voice_Out_Fail", gameObject);
+
         StartCoroutine("ResetCollectingWord");
     }
 }
