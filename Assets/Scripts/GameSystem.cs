@@ -6,6 +6,7 @@ public class GameSystem : MonoBehaviour
 
     public GameState gameState = GameState.StartMenu;
 
+
     void Awake()
     {
         if (instance == null)
@@ -35,5 +36,13 @@ public class GameSystem : MonoBehaviour
             gameState = GameState.Playing;
             Time.timeScale = 1f;
         }
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+            {
+            LevelManager.instance.LoadMenu();
+            }
     }
 }

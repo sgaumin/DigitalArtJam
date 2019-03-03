@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GuideSettings
   m_EditorClassIdentifier: 
   talkRange: 4
-  captureSpeed: 40
+  captureSpeed: 80
   resetSpeed: 20
   chanceToGoToCorridor: 0.5
