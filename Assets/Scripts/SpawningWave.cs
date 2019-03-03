@@ -6,7 +6,7 @@ public class SpawningWave : MonoBehaviour
 {
     [Header("Prefabs")]
     [SerializeField] private GuideMovement guidePrefab;
-    [SerializeField] private Visitor visitorPrefab;
+    [SerializeField] private Visitor[] visitorPrefab;
 
     [Header("Parameters")]
     [SerializeField] private float hourDuration;
@@ -65,7 +65,7 @@ public class SpawningWave : MonoBehaviour
 
         for (int i = 0; i < numberVisitors; i++)
         {
-            Visitor visitorTemp = Instantiate(visitorPrefab, spawningPointsVisitor[i].transform.position, Quaternion.Euler(new Vector3(0f, 180f, 0f)));
+            Visitor visitorTemp = Instantiate(visitorPrefab[Random.Range(0, visitorPrefab.Length)], spawningPointsVisitor[i].transform.position, Quaternion.Euler(new Vector3(0f, 180f, 0f)));
             visitorTemp.transform.SetParent(transform);
             visitorTemp.guideToFollow = guideTemp.transform;
         }
