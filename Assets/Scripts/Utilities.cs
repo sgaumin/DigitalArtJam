@@ -1,7 +1,7 @@
 ﻿public class Utilities
 {
-    public const string menuScene = "";
-    public const string gameScene = "";
+    public const string menuScene = "Start Menu";
+    public const string gameScene = "Seb";
 }
 
 public enum GuideState
