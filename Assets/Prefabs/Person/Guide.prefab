@@ -371,3 +371,4 @@ MonoBehaviour:
   visionHeight: 1.5
   visionAngle: 20
   checkDelay: 0.1
+  visionValues: {fileID: 11400000, guid: 67cd966af577d1641b92bf267e429d7b, type: 2}

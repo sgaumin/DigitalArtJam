@@ -74,15 +74,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AlarmSlider: {fileID: 0}
-  nbWordsRequired: 10
-  lowerAlarmSpeed: 50
-  guideAlarmSpeed: 70
-  visitorsAlarmSpeedTier1: 5
-  visitorsAlarmSpeedTier2: 10
-  visitorsAlarmSpeedTier3: 20
-  visitorsTier2: 4
-  visitorsTier3: 8
-  alertThreeshold: 60
   alarmValue: 0
   alarmStateGuide: 0
   alarmStateVisitor: 0
@@ -92,6 +83,7 @@ MonoBehaviour:
   visitorsNb: 0
   alertMode: 0
   nbWordsCollected: 0
+  alarmValues: {fileID: 11400000, guid: 24ed624ce618aab47bc5ab784c9ec76f, type: 2}
 --- !u!114 &3736990525506153137
 MonoBehaviour:
   m_ObjectHideFlags: 0

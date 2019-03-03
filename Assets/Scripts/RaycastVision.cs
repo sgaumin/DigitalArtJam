@@ -6,13 +6,10 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class RaycastVision : MonoBehaviour
 {
-    [SerializeField] private float sightDistance = 2f;
-    [SerializeField] private float visionHeight = 1.5f;
-    [SerializeField] private float visionAngle = 20f;
-    [SerializeField] private float checkDelay = 0.1f;
-
     private Transform playerTransform;
     private Guid guid;
+    
+    public VisionScriptableObject visionValues;
     
     private void Start()
     {
@@ -21,6 +18,39 @@ public class RaycastVision : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         StartCoroutine(PlayerCheckRoutine());
+    }
+
+    private void Update()
+    {
+        // TODO: For debug purpose, erase when playing
+        
+        Transform tr = transform;
+        Vector3 startVec = tr.position;
+        startVec.y += visionValues.visionHeight;
+        Vector3 startVecFwd = tr.forward;
+        // startVecFwd.y += visionHeight;
+
+        float rotationOffset = tr.eulerAngles.y;
+
+        Vector3 frontLineVec = startVec + startVecFwd * visionValues.sightDistance;
+
+        Vector3 leftLineVec = new Vector3(
+            Mathf.Cos((visionValues.visionAngle + 90f - rotationOffset) * Mathf.Deg2Rad),
+            0f,
+            Mathf.Sin((visionValues.visionAngle + 90f - rotationOffset) * Mathf.Deg2Rad));
+        leftLineVec *= visionValues.sightDistance;
+        leftLineVec += startVec;
+
+        Vector3 rightLineVec = new Vector3(
+            Mathf.Cos((-visionValues.visionAngle + 90f - rotationOffset) * Mathf.Deg2Rad),
+            0f,
+            Mathf.Sin((-visionValues.visionAngle + 90f - rotationOffset) * Mathf.Deg2Rad));
+        rightLineVec *= visionValues.sightDistance;
+        rightLineVec += startVec;
+
+        Debug.DrawLine(startVec, leftLineVec, Color.red);
+        Debug.DrawLine(startVec, frontLineVec, Color.green);
+        Debug.DrawLine(startVec, rightLineVec, Color.blue);
     }
 
     private IEnumerator PlayerCheckRoutine()
@@ -44,7 +74,7 @@ public class RaycastVision : MonoBehaviour
     {
         Transform tr = transform;
         Vector3 startVec = tr.position;
-        startVec.y += visionHeight;
+        startVec.y += visionValues.visionHeight;
         Vector3 startVecFwd = tr.forward;
         // startVecFwd.y += visionHeight;
 
@@ -54,20 +84,20 @@ public class RaycastVision : MonoBehaviour
 
         float rotationOffset = tr.eulerAngles.y;
 
-        Vector3 frontLineVec = startVec + startVecFwd * sightDistance;
+        Vector3 frontLineVec = startVec + startVecFwd * visionValues.sightDistance;
 
         Vector3 leftLineVec = new Vector3(
-            Mathf.Cos((visionAngle + 90f - rotationOffset) * Mathf.Deg2Rad),
+            Mathf.Cos((visionValues.visionAngle + 90f - rotationOffset) * Mathf.Deg2Rad),
             0f,
-            Mathf.Sin((visionAngle + 90f - rotationOffset) * Mathf.Deg2Rad));
-        leftLineVec *= sightDistance;
+            Mathf.Sin((visionValues.visionAngle + 90f - rotationOffset) * Mathf.Deg2Rad));
+        leftLineVec *= visionValues.sightDistance;
         leftLineVec += startVec;
 
         Vector3 rightLineVec = new Vector3(
-            Mathf.Cos((-visionAngle + 90f - rotationOffset) * Mathf.Deg2Rad),
+            Mathf.Cos((-visionValues.visionAngle + 90f - rotationOffset) * Mathf.Deg2Rad),
             0f,
-            Mathf.Sin((-visionAngle + 90f - rotationOffset) * Mathf.Deg2Rad));
-        rightLineVec *= sightDistance;
+            Mathf.Sin((-visionValues.visionAngle + 90f - rotationOffset) * Mathf.Deg2Rad));
+        rightLineVec *= visionValues.sightDistance;
         rightLineVec += startVec;
 
         Debug.DrawLine(startVec, leftLineVec, Color.red);
@@ -81,8 +111,8 @@ public class RaycastVision : MonoBehaviour
         // But instead we want to collide against everything except layer 2. The ~ operator does this, it inverts a bitmask.
         layerMask = ~layerMask;
 
-        if ((Vector3.Angle(rayDirection, startVecFwd)) < visionAngle &&
-            Physics.Raycast(startVec, rayDirection, out hit, sightDistance, layerMask))
+        if ((Vector3.Angle(rayDirection, startVecFwd)) < visionValues.visionAngle &&
+            Physics.Raycast(startVec, rayDirection, out hit, visionValues.sightDistance, layerMask))
         {
             // Detect if player is within the field of view
             return hit.transform.CompareTag("Player");
