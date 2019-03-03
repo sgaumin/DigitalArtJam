@@ -6,23 +6,22 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     public GameObject menu;
-    public GameObject button_4; 
+    //public GameObject button_3; 
 
     public Button firstButton;
     public Button secondButton;
     public Button thirdButton;
-    public Button fourthButton; 
 
     private Text firstButtonText;
     private Text secondButtonText;
     private Text thirdButtonText;
-    private Text fourthButtonText;
 
     public Text header; 
 
     public bool gameOver = false;
-    private bool fourthButtonIsActive = false;
-    private bool isPlaying = false; 
+    private bool isPlaying = false;
+
+    public LevelManager levelManager; 
 
     // Start is called before the first frame update
     void Start()
@@ -30,9 +29,10 @@ public class UiManager : MonoBehaviour
         firstButtonText = firstButton.GetComponentInChildren<Text>();
         secondButtonText = secondButton.GetComponentInChildren<Text>();
         thirdButtonText = thirdButton.GetComponentInChildren<Text>();
-        fourthButtonText = fourthButton.GetComponentInChildren<Text>();
 
         StartMenu();
+
+        thirdButtonText.text = "";
     }
 
     // Update is called once per frame
@@ -41,20 +41,6 @@ public class UiManager : MonoBehaviour
         if(Input.GetKey(KeyCode.Escape))
         {
             GameSystem.instance.gameState = GameState.Pause;
-        }
-
-        /*if(gameOver == true)
-        {
-            GameOverMenu();
-        }*/
-
-        if(fourthButtonIsActive == true)
-        {
-            button_4.SetActive(true);
-        }
-        else if(fourthButtonIsActive == false)
-        {
-            button_4.SetActive(false);
         }
 
         if(GameSystem.instance.gameState == GameState.StartMenu)
@@ -97,12 +83,7 @@ public class UiManager : MonoBehaviour
 
     void QuitGame()
     {
-        Debug.Log("quit");
-    }
-
-    void SettingsMenu()
-    {
-        Debug.Log("settings");
+        levelManager.QuitGame();
     }
 
     void PauseMenu()
@@ -117,12 +98,9 @@ public class UiManager : MonoBehaviour
         secondButton.onClick.AddListener(StartMenu);
         secondButtonText.text = "Start Menu";
 
+
         thirdButton.onClick.AddListener(QuitGame);
         thirdButtonText.text = "Quit";
-
-        fourthButtonIsActive = true; 
-        fourthButton.onClick.AddListener(SettingsMenu);
-        fourthButtonText.text = "Settings";
     }
 
     void ResumeGame()
@@ -150,10 +128,7 @@ public class UiManager : MonoBehaviour
         secondButton.onClick.AddListener(QuitGame);
         secondButtonText.text = "Quit";
 
-        thirdButton.onClick.AddListener(SettingsMenu);
-        thirdButtonText.text = "Settings";
-
-        fourthButtonIsActive = false;
+        thirdButtonText.text = "";
     }
 
     void GameOverMenu()
@@ -168,9 +143,9 @@ public class UiManager : MonoBehaviour
         secondButton.onClick.AddListener(StartMenu);
         secondButtonText.text = "Start Menu";
 
+
         thirdButton.onClick.AddListener(QuitGame);
         thirdButtonText.text = "Quit";
 
-        fourthButtonIsActive = false;
     }
 }
