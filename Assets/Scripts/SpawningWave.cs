@@ -60,12 +60,12 @@ public class SpawningWave : MonoBehaviour
     void SpawnWave(int numberVisitors)
     {
 
-        GuideMovement guideTemp = Instantiate(guidePrefab, spawningPointsGuide.transform.position, Quaternion.identity);
+        GuideMovement guideTemp = Instantiate(guidePrefab, spawningPointsGuide.transform.position, Quaternion.Euler(new Vector3(0f,180f,0f)));
         guideTemp.transform.SetParent(transform);
 
         for (int i = 0; i < numberVisitors; i++)
         {
-            Visitor visitorTemp = Instantiate(visitorPrefab, spawningPointsVisitor[i].transform.position, Quaternion.identity);
+            Visitor visitorTemp = Instantiate(visitorPrefab, spawningPointsVisitor[i].transform.position, Quaternion.Euler(new Vector3(0f, 180f, 0f)));
             visitorTemp.transform.SetParent(transform);
             visitorTemp.guideToFollow = guideTemp.transform;
         }
