@@ -191,6 +191,8 @@ GameObject:
   - component: {fileID: 7906396377121723459}
   - component: {fileID: 1542418506}
   - component: {fileID: 1542418515}
+  - component: {fileID: 5315327212787430093}
+  - component: {fileID: 4367441399621106533}
   m_Layer: 9
   m_Name: Guide
   m_TagString: Guide
@@ -282,7 +284,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 4
+  m_Radius: 8
   m_Height: 8
   m_Direction: 1
   m_Center: {x: -0, y: 0, z: 0}
@@ -371,3 +373,46 @@ MonoBehaviour:
   visionHeight: 1.5
   visionAngle: 20
   checkDelay: 0.1
+--- !u!114 &5315327212787430093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7906396377121723466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e80c406589c6438bb10ca1336fb648f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
+--- !u!114 &4367441399621106533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7906396377121723466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad811d34c07cb4e4f87c1f939bb65465, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: 3f2ff36a
+  useOtherObject: 1
+  data:
+    valueGuid: 
+    groupGuid: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2400c4b9187314c23865190db88b7ec1,
+      type: 2}
+  valueGuid: 
+  groupGuid: 

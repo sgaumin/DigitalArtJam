@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bee895be62b8413097838f2f5e292ba, type: 3}
+  m_Name: 736B4F07-0FB4-42CB-87B9-F30CD1D82F39
+  m_EditorClassIdentifier: 
+  objectName: Reset_Game_Parameter_Filter_On_Rtpc
+  id: 937281082
+  guid: 736B4F07-0FB4-42CB-87B9-F30CD1D82F39

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd7040055c5b548b28e1f55347d77018, type: 3}
+  m_Name: 12B37CCC-AE9E-4F1F-95EA-1B736321D2D3
+  m_EditorClassIdentifier: 
+  objectName: Rvrb_Open
+  id: 4279841884
+  guid: 12B37CCC-AE9E-4F1F-95EA-1B736321D2D3
