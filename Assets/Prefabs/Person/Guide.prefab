@@ -1859,6 +1859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guideState: 1
   nextPosition: {fileID: 0}
+  radar: {fileID: 3275046900008319843}
   guideValues: {fileID: 11400000, guid: c8aed24b298a80041871f2eddabd02c7, type: 2}
 --- !u!114 &6355412521088188931
 MonoBehaviour:

@@ -9,6 +9,8 @@ public class GuideMovement : MonoBehaviour
 
     [HideInInspector] public Transform nextPosition;
 
+    [SerializeField] private GameObject radar;
+
     private Transform[] destinationsFirstRoomTemp;
     private Transform[] destinastionsSecondRoomTemp;
     private Transform[] destinationsThirdRoomTemp;
@@ -27,7 +29,8 @@ public class GuideMovement : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
 
-        
+        radar.SetActive(false);
+
         goToCorridor = Random.value < guideValues.chanceToGoToCorridor;
 
         InitializePath();
@@ -48,6 +51,7 @@ public class GuideMovement : MonoBehaviour
                 agent.SetDestination(nextPosition.position);
                 guideState = GuideState.Walking;
                 anim.SetTrigger("walking");
+                radar.SetActive(false);
             }
 
             if (guideState == GuideState.Walking)
@@ -61,6 +65,7 @@ public class GuideMovement : MonoBehaviour
                 // Update Guide State
                 guideState = GuideState.Talk;
                 anim.SetTrigger("idle");
+                radar.SetActive(true);
 
                 yield return new WaitForSeconds(GuideManager.instance.timeToChange);
             }
