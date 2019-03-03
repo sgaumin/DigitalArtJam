@@ -16,6 +16,7 @@ public class GuideMovement : MonoBehaviour
     private Queue<Transform> path;
     private NavMeshAgent agent;
     private bool goToCorridor;
+    private Animator anim;
 
     public GuideManagerScriptableObject guideValues;
 
@@ -24,7 +25,9 @@ public class GuideMovement : MonoBehaviour
         path = new Queue<Transform>();
 
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
 
+        
         goToCorridor = Random.value < guideValues.chanceToGoToCorridor;
 
         InitializePath();
@@ -44,6 +47,7 @@ public class GuideMovement : MonoBehaviour
             {
                 agent.SetDestination(nextPosition.position);
                 guideState = GuideState.Walking;
+                anim.SetTrigger("walking");
             }
 
             if (guideState == GuideState.Walking)
@@ -56,6 +60,7 @@ public class GuideMovement : MonoBehaviour
 
                 // Update Guide State
                 guideState = GuideState.Talk;
+                anim.SetTrigger("idle");
 
                 yield return new WaitForSeconds(GuideManager.instance.timeToChange);
             }
