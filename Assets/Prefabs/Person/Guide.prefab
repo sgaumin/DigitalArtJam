@@ -338,7 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guideState: 1
   nextPosition: {fileID: 0}
-  chanceToGoToCorridor: 0.5
+  guideValues: {fileID: 11400000, guid: c8aed24b298a80041871f2eddabd02c7, type: 2}
 --- !u!114 &1542418506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,10 +351,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b57083db0a67b4e8e443c4e7c7881a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  talkRange: 4
-  speed: 40
-  resetSpeed: 200
   captureWordProgress: 0
+  guideValues: {fileID: 11400000, guid: c8aed24b298a80041871f2eddabd02c7, type: 2}
+  collider: {fileID: 1542418507}
 --- !u!114 &1542418515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,8 +366,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947a2a079ff194b4ba1ef58c522ea535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightDistance: 2
-  visionHeight: 1.5
-  visionAngle: 20
-  checkDelay: 0.1
   visionValues: {fileID: 11400000, guid: 67cd966af577d1641b92bf267e429d7b, type: 2}

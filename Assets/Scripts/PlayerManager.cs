@@ -101,7 +101,7 @@ public class PlayerManager : MonoBehaviour
     private IEnumerator LowerAlarm()
     {
         lowerAlarmRunning = true;
-        while (alarmValue >= 0.0f && lowerAlarmRunning)
+        while (alarmValue >= 0.0f)
         {
             alarmValue -= Time.deltaTime * alarmValues.lowerAlarmSpeed;
             yield return null;
@@ -114,7 +114,7 @@ public class PlayerManager : MonoBehaviour
     private IEnumerator AddAlarmFromGuide()
     {
         guideAlarmRunning = true;
-        while (alarmValue <= maxAlarmValue && guideAlarmRunning)
+        while (alarmValue <= maxAlarmValue)
         {
             alarmValue += Time.deltaTime * alarmValues.guideAlarmSpeed;
             yield return null;
@@ -126,7 +126,7 @@ public class PlayerManager : MonoBehaviour
     private IEnumerator AddAlarmFromVisitors()
     {
         visitorAlarmRunning = true;
-        while (alarmValue <= maxAlarmValue && visitorAlarmRunning)
+        while (alarmValue <= maxAlarmValue)
         {
             float speed;
             visitorsNb = visitorsAlarm.Count;

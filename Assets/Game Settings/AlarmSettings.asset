@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: AlarmSettings
   m_EditorClassIdentifier: 
   nbWordsRequired: 10
-  lowerAlarmSpeed: 0.1
-  guideAlarmSpeed: 0.05
-  visitorsAlarmSpeedTier1: 1
-  visitorsAlarmSpeedTier2: 5
-  visitorsAlarmSpeedTier3: 20
+  lowerAlarmSpeed: 50
+  guideAlarmSpeed: 100
+  visitorsAlarmSpeedTier1: 20
+  visitorsAlarmSpeedTier2: 30
+  visitorsAlarmSpeedTier3: 40
   visitorsTier2: 2
   visitorsTier3: 4
   alertThreeshold: 60

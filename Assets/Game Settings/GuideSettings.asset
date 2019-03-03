@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3112613338324cd4eacdf49fed14f9f7, type: 3}
   m_Name: GuideSettings
   m_EditorClassIdentifier: 
-  sightDistance: 4.95
+  talkRange: 4
+  captureSpeed: 40
+  resetSpeed: 20
+  chanceToGoToCorridor: 0.5
