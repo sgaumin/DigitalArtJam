@@ -11,18 +11,6 @@ public class PlayerManager : MonoBehaviour
 
     private float maxAlarmValue = 100f;
 
-    [SerializeField] private int nbWordsRequired = 10;
-    
-   
-    [SerializeField] private float lowerAlarmSpeed = 0.1f;
-    [SerializeField] private float guideAlarmSpeed = 0.05f;
-    [SerializeField] private float visitorsAlarmSpeedTier1 = 1f;
-    [SerializeField] private float visitorsAlarmSpeedTier2 = 5f;
-    [SerializeField] private float visitorsAlarmSpeedTier3 = 20f;
-    [SerializeField] private int visitorsTier2 = 4;
-    [SerializeField] private int visitorsTier3 = 8;
-    [SerializeField] private float alertThreeshold = 60;
-
     public float alarmValue = 0f;
     public bool alarmStateGuide = false;
     public bool alarmStateVisitor = false;
@@ -36,8 +24,10 @@ public class PlayerManager : MonoBehaviour
     public bool alertMode = false;
 
     private List<Guid> visitorsAlarm = new List<Guid>();
-    
+
     public int nbWordsCollected = 0;
+
+    public AlarmManagerScriptableObject alarmValues;
     
     private void Awake()
     {
@@ -46,7 +36,20 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (alarmStateGuide || alarmStateVisitor)
+        // Stop Alarm
+        if (!alarmStateGuide && !alarmStateVisitor)
+        {
+            guideAlarmRunning = false;
+            visitorAlarmRunning = false;
+            StopCoroutine("AddAlarmFromGuide");
+            StopCoroutine("AddAlarmFromVisitors");
+
+            if (!lowerAlarmRunning && alarmValue > 0.0f)
+            {
+                StartCoroutine(LowerAlarm());
+            }
+        }
+        else
         {
             lowerAlarmRunning = false;
             StopCoroutine("LowerAlarm");
@@ -56,42 +59,32 @@ public class PlayerManager : MonoBehaviour
             {
                 if (!guideAlarmRunning && alarmValue <= maxAlarmValue)
                 {
-                    lowerAlarmRunning = false;
                     StartCoroutine(AddAlarmFromGuide());
                 }
             }
+            else
+            {
+                // Stop Guide Alarm
+                guideAlarmRunning = false;
+                StopCoroutine("AddAlarmFromGuide");
+            }
+
             // Start Visitor Alarm
-            else if (alarmStateVisitor)
+            if (alarmStateVisitor)
             {
                 if (!visitorAlarmRunning && alarmValue <= maxAlarmValue)
                 {
-                    lowerAlarmRunning = false;
                     StartCoroutine(AddAlarmFromVisitors());
                 }
             }
-        }
-        // Stop Alarm
-        else if (!lowerAlarmRunning && alarmValue > 0.0f)
-        {
-            StopCoroutine("AddAlarmFromGuide");
-            StopCoroutine("AddAlarmFromVisitors");
-            StartCoroutine(LowerAlarm());
-        }
-
-        // Stop Guide Alarm
-        if (!alarmStateGuide)
-        {
-            guideAlarmRunning = false;
-            StopCoroutine("AddAlarmFromGuide");
+            else
+            {
+                // Stop Visitor Alarm
+                visitorAlarmRunning = false;
+                StopCoroutine("AddAlarmFromVisitors");
+            }
         }
 
-        // Stop Visitor Alarm
-        if (!alarmStateVisitor)
-        {
-            visitorAlarmRunning = false;
-            StopCoroutine("AddAlarmFromVisitors");
-        }
-        
         // GAME OVER
         if (alarmValue >= maxAlarmValue)
         {
@@ -102,15 +95,15 @@ public class PlayerManager : MonoBehaviour
     private void LateUpdate()
     {
         AlarmSlider.value = alarmValue;
-        alertMode = alarmValue > alertThreeshold;
+        alertMode = alarmValue > alarmValues.alertThreeshold;
     }
 
     private IEnumerator LowerAlarm()
     {
         lowerAlarmRunning = true;
-        while (alarmValue >= 0.0f && lowerAlarmRunning)
+        while (alarmValue >= 0.0f)
         {
-            alarmValue -= Time.deltaTime * lowerAlarmSpeed;
+            alarmValue -= Time.deltaTime * alarmValues.lowerAlarmSpeed;
             yield return null;
         }
 
@@ -121,9 +114,9 @@ public class PlayerManager : MonoBehaviour
     private IEnumerator AddAlarmFromGuide()
     {
         guideAlarmRunning = true;
-        while (alarmValue <= maxAlarmValue && guideAlarmRunning)
+        while (alarmValue <= maxAlarmValue)
         {
-            alarmValue += Time.deltaTime * guideAlarmSpeed;
+            alarmValue += Time.deltaTime * alarmValues.guideAlarmSpeed;
             yield return null;
         }
 
@@ -133,21 +126,21 @@ public class PlayerManager : MonoBehaviour
     private IEnumerator AddAlarmFromVisitors()
     {
         visitorAlarmRunning = true;
-        while (alarmValue <= maxAlarmValue && visitorAlarmRunning)
+        while (alarmValue <= maxAlarmValue)
         {
             float speed;
             visitorsNb = visitorsAlarm.Count;
-            if (visitorsNb < visitorsTier2)
-                speed = visitorsAlarmSpeedTier1;
-            else if (visitorsNb < visitorsTier3)
-                speed = visitorsAlarmSpeedTier2;
+            if (visitorsNb < alarmValues.visitorsTier2)
+                speed = alarmValues.visitorsAlarmSpeedTier1;
+            else if (visitorsNb < alarmValues.visitorsTier3)
+                speed = alarmValues.visitorsAlarmSpeedTier2;
             else
-                speed = visitorsAlarmSpeedTier3;
+                speed = alarmValues.visitorsAlarmSpeedTier3;
 
             alarmValue += Time.deltaTime * speed;
             yield return null;
         }
-        
+
         visitorAlarmRunning = false;
     }
 
