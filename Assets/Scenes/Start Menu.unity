@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -380,6 +380,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5109905036889791312, guid: deda3b0468b5a8e4687825c17222fae0,
     type: 3}
   m_PrefabInstance: {fileID: 4231736662774509180}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &339262864 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2060358669952882151, guid: c4273e1fb5a0bbb41b52d0d621f67b09,
+    type: 3}
+  m_PrefabInstance: {fileID: 8083988789710087464}
   m_PrefabAsset: {fileID: 0}
 --- !u!43 &345935262
 Mesh:
@@ -1112,12 +1118,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.089127, y: 2.288888, z: 4.089125}
   m_Center: {x: -0.19152856, y: 1.1547539, z: 0.100227945}
---- !u!4 &981132574 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: c4273e1fb5a0bbb41b52d0d621f67b09,
-    type: 3}
-  m_PrefabInstance: {fileID: 8083988789710087464}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1052540226 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5548405174320986268, guid: f67693865a0982a4a95e87912e631953,
@@ -1691,6 +1691,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guide
       objectReference: {fileID: 0}
+    - target: {fileID: 3858423379038168586, guid: b95c1034500df8d488a3e4e91e1b3dc5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3858423379038168581, guid: b95c1034500df8d488a3e4e91e1b3dc5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1747,11 +1752,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3858423379038168576, guid: b95c1034500df8d488a3e4e91e1b3dc5,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3858423379038168586, guid: b95c1034500df8d488a3e4e91e1b3dc5,
         type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1985,12 +1985,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 3b1c5ed5b52f76a438374b1acde59bbf,
     type: 3}
   m_PrefabInstance: {fileID: 8083988790120826755}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1659478309 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100002, guid: a67a27fd382f246c3a5ff720219656ba,
-    type: 3}
-  m_PrefabInstance: {fileID: 8083988789429732564}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1664155169 stripped
 GameObject:
@@ -2255,6 +2249,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Visitor 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3253004165651257920, guid: ee4a9c97711428744aea49fb02ba9d2d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3253004165651257934, guid: ee4a9c97711428744aea49fb02ba9d2d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2315,12 +2314,12 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3253004165651257921, guid: ee4a9c97711428744aea49fb02ba9d2d,
+    - target: {fileID: 3253004165651257935, guid: ee4a9c97711428744aea49fb02ba9d2d,
         type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3253004165651257920, guid: ee4a9c97711428744aea49fb02ba9d2d,
+    - target: {fileID: 3253004165651257921, guid: ee4a9c97711428744aea49fb02ba9d2d,
         type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -2650,6 +2649,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Visitor 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4662529600030673512, guid: e0bdc2c014a2e8a4685173556426363a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4662529600030673510, guid: e0bdc2c014a2e8a4685173556426363a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2706,11 +2710,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4662529600030673513, guid: e0bdc2c014a2e8a4685173556426363a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4662529600030673512, guid: e0bdc2c014a2e8a4685173556426363a,
         type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -6468,10 +6467,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8083988790418679523}
     m_Modifications:
-    - target: {fileID: 100000, guid: c4273e1fb5a0bbb41b52d0d621f67b09, type: 3}
-      propertyPath: m_Name
-      value: Crab Variant
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c4273e1fb5a0bbb41b52d0d621f67b09, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6516,22 +6511,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c4273e1fb5a0bbb41b52d0d621f67b09, type: 3}
+      propertyPath: m_Name
+      value: Crab Variant
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4273e1fb5a0bbb41b52d0d621f67b09, type: 3}
---- !u!64 &8083988789804709802
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659478309}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a67a27fd382f246c3a5ff720219656ba, type: 3}
 --- !u!65 &8083988789804709804
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7345,7 +7330,7 @@ Transform:
   - {fileID: 1762583950}
   - {fileID: 1119998585}
   - {fileID: 1182434922}
-  - {fileID: 981132574}
+  - {fileID: 339262864}
   - {fileID: 200667990}
   m_Father: {fileID: 8083988790475030140}
   m_RootOrder: 0
