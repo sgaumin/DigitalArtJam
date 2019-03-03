@@ -27,7 +27,8 @@ public class GuideTalking : MonoBehaviour
         collectingWord = true;
         captureWordProgress = 0f;
 
-        // Start word Detection
+        AkSoundEngine.PostEvent("Play_Guide_Voice_In", gameObject);
+        AkSoundEngine.SetState("SoundEffects", "In");
         while (captureWordProgress <= 100f)
         {
             captureWordProgress += Time.deltaTime * guideValues.captureSpeed;
@@ -36,7 +37,9 @@ public class GuideTalking : MonoBehaviour
 
         // Word collected, yey!
         collectingWord = false;
-        // son check
+        AkSoundEngine.SetSwitch ("Fail_Chek_Zone", "Check", this.gameObject);
+      //  AkSoundEngine.SetState ("SoundEffects", "Out");
+        AkSoundEngine.PostEvent("Play_Guide_Voice_Out_02", gameObject); 
         PlayerManager.instance.nbWordsCollected++;
         StartCoroutine("ResetCollectingWord");
 
@@ -52,6 +55,7 @@ public class GuideTalking : MonoBehaviour
         }
 
         if (!collectingWord)
+        captureWordProgress = 0f;
         {
             // son feedback bad
         }
