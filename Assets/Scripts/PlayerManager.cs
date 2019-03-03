@@ -28,10 +28,17 @@ public class PlayerManager : MonoBehaviour
     public int nbWordsCollected = 0;
 
     public AlarmManagerScriptableObject alarmValues;
+
+    private GameObject player;
     
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
     }
 
     private void Update()
@@ -92,8 +99,30 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    private IEnumerator StartAlarmSound()
+    {
+        yield return new WaitForSeconds(1);
+        while (true)
+        {
+            float timerValue = (10 / alarmValue);
+            AkSoundEngine.PostEvent("Play_Alarm_Tick_Sound", player.gameObject);
+             yield return new WaitForSeconds(timerValue);
+        }
+
+    } 
+    
     private void LateUpdate()
     {
+        if (alarmValue > 0f)
+        {
+            StartCoroutine(StartAlarmSound());
+        }
+        else
+        {
+            StopCoroutine("StartAlarmSound");
+        }
+        
+        
         AlarmSlider.value = alarmValue;
         alertMode = alarmValue > alarmValues.alertThreeshold;
     }
