@@ -4,18 +4,22 @@ using UnityEngine.UI;
 
 public class GuideTalking : MonoBehaviour
 {
-    [SerializeField] private float talkRange = 2f;
-    [SerializeField] private float speed = 2f;
-    [SerializeField] private float resetSpeed = 20f;
-
     public float captureWordProgress = 0f;
 
     private Slider captureWordSlider;
     private bool collectingWord = false;
 
+    public GuideManagerScriptableObject guideValues;
+
+    public CapsuleCollider collider;
+
+    private GuideMovement guideMovement;
+    
     private void Start()
     {
         captureWordSlider = GameObject.FindGameObjectWithTag("WordSlider").GetComponent<Slider>();
+        collider.radius = guideValues.talkRange;
+        guideMovement = GetComponent<GuideMovement>();
     }
 
     private IEnumerator StartCollectingWord()
@@ -26,7 +30,7 @@ public class GuideTalking : MonoBehaviour
         // Start word Detection
         while (captureWordProgress <= 100f)
         {
-            captureWordProgress += Time.deltaTime * speed;
+            captureWordProgress += Time.deltaTime * guideValues.captureSpeed;
             yield return null;
         }
 
@@ -43,16 +47,20 @@ public class GuideTalking : MonoBehaviour
     {
         while (captureWordProgress > 0f && !collectingWord)
         {
-            captureWordProgress -= Time.deltaTime * resetSpeed;
+            captureWordProgress -= Time.deltaTime * guideValues.resetSpeed;
             yield return null;
         }
-        
+
         if (!collectingWord)
+        {
             // son feedback bad
-            captureWordProgress = 0f;
+        }
+
+        collectingWord = false;
+        captureWordProgress = 0f;
         yield return null;
     }
-    
+
     private void LateUpdate()
     {
         captureWordSlider.value = captureWordProgress;
@@ -62,6 +70,13 @@ public class GuideTalking : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         StartCoroutine("StartCollectingWord");
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player")) return;
+        if (guideMovement.guideState == GuideState.Talk && !collectingWord)
+            StartCoroutine("StartCollectingWord");
     }
 
     private void OnTriggerExit(Collider other)
