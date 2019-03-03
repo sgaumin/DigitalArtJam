@@ -18,4 +18,22 @@ public class GameSystem : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void Start()
+    {
+        InputManager.OnPause += PauseGame;
+    }
+
+    public void PauseGame()
+    {
+        if (gameState == GameState.Playing) {
+            gameState = GameState.Pause;
+            Time.timeScale = 0f;
+        }
+
+        if (gameState == GameState.Pause) {
+            gameState = GameState.Playing;
+            Time.timeScale = 1f;
+        }
+    }
 }
