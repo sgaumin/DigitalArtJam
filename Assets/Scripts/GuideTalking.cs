@@ -14,12 +14,17 @@ public class GuideTalking : MonoBehaviour
     public CapsuleCollider collider;
 
     private GuideMovement guideMovement;
-    
+
+    private GameObject player;
+
+    [SerializeField] private float soundDistThreshold = 30f;
+
     private void Start()
     {
         captureWordSlider = GameObject.FindGameObjectWithTag("WordSlider").GetComponent<Slider>();
         collider.radius = guideValues.talkRange;
         guideMovement = GetComponent<GuideMovement>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private IEnumerator StartCollectingWord()
@@ -37,9 +42,9 @@ public class GuideTalking : MonoBehaviour
 
         // Word collected, yey!
         collectingWord = false;
-        AkSoundEngine.SetSwitch ("Fail_Chek_Zone", "Check", this.gameObject);
-      //  AkSoundEngine.SetState ("SoundEffects", "Out");
-        AkSoundEngine.PostEvent("Play_Guide_Voice_Out_02", gameObject); 
+        AkSoundEngine.SetSwitch("Fail_Chek_Zone", "Check", this.gameObject);
+        //  AkSoundEngine.SetState ("SoundEffects", "Out");
+        AkSoundEngine.PostEvent("Play_Guide_Voice_Out_02", gameObject);
         PlayerManager.instance.nbWordsCollected++;
         StartCoroutine("ResetCollectingWord");
 
@@ -55,7 +60,7 @@ public class GuideTalking : MonoBehaviour
         }
 
         if (!collectingWord)
-        captureWordProgress = 0f;
+            captureWordProgress = 0f;
         {
             // son feedback bad
         }
@@ -63,6 +68,12 @@ public class GuideTalking : MonoBehaviour
         collectingWord = false;
         captureWordProgress = 0f;
         yield return null;
+    }
+
+    private void Update()
+    {
+        float distance = (player.transform.position - transform.position).magnitude;
+        AkSoundEngine.SetRTPCValue("Dist_Guide_Player", Mathf.Min(distance, soundDistThreshold), gameObject);
     }
 
     private void LateUpdate()
