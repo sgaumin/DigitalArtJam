@@ -20,7 +20,7 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(pauseCode))
+        if (Input.GetKeyDown(pauseCode))
             OnPause();
     }
 }
