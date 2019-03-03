@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2709353732231405186}
   - component: {fileID: 2709353732231405185}
   m_Layer: 0
-  m_Name: exit
+  m_Name: exit (old)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2709353732231405184}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 166.31, y: -0.077297, z: -130.09}
-  m_LocalScale: {x: 6.575313, y: 0.5, z: 15.370673}
+  m_LocalScale: {x: 10.484343, y: 0.5, z: 15.370681}
   m_Children:
   - {fileID: 2709353732391417239}
   - {fileID: 2709353731233877403}
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: 2100000, guid: 61d2a9a28872c48febab6a611215ce2f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -295,9 +295,17 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_IsSelectable: 1
-  m_SelectedFaces: 
-  m_SelectedEdges: []
-  m_SelectedVertices: 
+  m_SelectedFaces: 04000000
+  m_SelectedEdges:
+  - a: 16
+    b: 17
+  - a: 18
+    b: 16
+  - a: 17
+    b: 19
+  - a: 19
+    b: 18
+  m_SelectedVertices: 10000000110000001200000013000000
 --- !u!64 &2709353732231405185
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -319,10 +327,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2709353732231405197}
     m_Modifications:
-    - target: {fileID: 100000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
-      propertyPath: m_Name
-      value: barrier (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.3208497
@@ -379,6 +383,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.11406321
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
+      propertyPath: m_Name
+      value: barrier (4)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
 --- !u!4 &2709353730890768053 stripped
@@ -394,10 +402,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2709353732231405197}
     m_Modifications:
-    - target: {fileID: 100000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
-      propertyPath: m_Name
-      value: barrier (6)
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.2333536
@@ -454,6 +458,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.11406321
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
+      propertyPath: m_Name
+      value: barrier (6)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
 --- !u!4 &2709353731233877403 stripped
@@ -469,10 +477,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2709353732231405197}
     m_Modifications:
-    - target: {fileID: 100000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
-      propertyPath: m_Name
-      value: barrier (7)
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.2333536
@@ -529,6 +533,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.11406321
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
+      propertyPath: m_Name
+      value: barrier (7)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
 --- !u!4 &2709353731901944477 stripped
@@ -544,10 +552,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2709353732231405197}
     m_Modifications:
-    - target: {fileID: 100000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
-      propertyPath: m_Name
-      value: barrier (5)
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.3208497
@@ -603,6 +607,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.11406321
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
+      propertyPath: m_Name
+      value: barrier (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b1c5ed5b52f76a438374b1acde59bbf, type: 3}
