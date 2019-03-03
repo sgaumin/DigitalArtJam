@@ -7,10 +7,10 @@ public class InputManager : MonoBehaviour
     public static InputManager instance;
 
     // Action
-    public event Action OnPause = delegate { };
+    public static event Action OnPause = delegate { };
 
     // Inputs Code
-    [SerializeField] private KeyCode pauseCode = KeyCode.P;
+    [SerializeField] private KeyCode pauseCode = KeyCode.Escape;
 
     // Initialize Singleton
     private void Awake()
