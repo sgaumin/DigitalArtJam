@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -33,8 +32,8 @@ public class Visitor : MonoBehaviour
             {
                 Vector3 direction = (guideToFollow.position - transform.position).normalized;
                 Vector3 nextPos = guideToFollow.position - direction * moveSpeed;
-                anim.SetTrigger("walking");
                 agent.SetDestination(nextPos);
+                anim.SetTrigger("walking");
             }
 
             yield return new WaitForSeconds(timeToMove);
