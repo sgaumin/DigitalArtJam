@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nbWordsRequired: 10
   lowerAlarmSpeed: 50
-  guideAlarmSpeed: 100
+  guideAlarmSpeed: 35
   visitorsAlarmSpeedTier1: 20
   visitorsAlarmSpeedTier2: 30
   visitorsAlarmSpeedTier3: 40

@@ -45,7 +45,6 @@ public class GameSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             LevelManager.instance.LoadMenu();
-            AkSoundEngine.PostEvent("Play_DGA_Sfx_GameOver", gameObject);
         }
     }
 }
