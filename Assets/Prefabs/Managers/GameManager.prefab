@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4979215964908280518}
   - component: {fileID: 1587301288}
   - component: {fileID: 3736990525506153137}
+  - component: {fileID: 2047168073}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -54,13 +55,21 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  destinationsSecondRoom: []
+  destinationsSecondRoom:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   destinationsThirdRoom:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  destinationsCorridor: []
+  destinationsCorridor:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1587301288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,20 +105,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82a29db55617ba54d97d3381ee10e3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guidePrefab: {fileID: 7906396377121723459, guid: 2d217eade5abe4c458d184c904f6cc12,
+  guidePrefab: {fileID: 3858423379038168586, guid: b95c1034500df8d488a3e4e91e1b3dc5,
     type: 3}
-  visitorPrefab: {fileID: 3502893803404988240, guid: 37bc8725517eba34794b12f0bc11d536,
-    type: 3}
+  visitorPrefab:
+  - {fileID: 4662529600030673512, guid: e0bdc2c014a2e8a4685173556426363a, type: 3}
+  - {fileID: 3253004165651257920, guid: ee4a9c97711428744aea49fb02ba9d2d, type: 3}
   hourDuration: 30
   nbSpawnPerHours:
   - 1
+  - 1
   - 2
-  - 3
-  - 4
-  - 5
-  - 4
-  - 3
   - 2
+  - 2
+  - 1
+  - 1
+  - 1
   - 1
   - 1
   numberVisitorSpawnMin: 2
@@ -125,3 +135,15 @@ MonoBehaviour:
   - {fileID: 0}
   spawningPointsGuide: {fileID: 0}
   hourText: {fileID: 0}
+--- !u!114 &2047168073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4979215964908280521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc0a48b97d68b44ba736e0303d5aa07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
